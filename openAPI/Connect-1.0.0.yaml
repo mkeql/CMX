@@ -1,0 +1,119 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/mkeql/Connect/1.0.0
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: Portal Connect API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: connects
+    description: Portal connect submit
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /cmx/connect:
+    post:
+      tags:
+        - connect
+      summary: create a connect
+      operationId: createConnect
+      description: create a connect in peace
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+             schema:
+               $ref: "#/components/schemas/ApiResponse"
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Connect'
+        
+components:
+  schemas:
+    Connect:
+      type: object
+      required:
+        - connectDetails
+        - nmidetails
+      properties:
+        connectDetails:
+            $ref: '#/components/schemas/ConnectDetails'
+        nmidetails :   
+            $ref: '#/components/schemas/PremiseData'
+        
+    ConnectDetails:
+      type: object
+      required:
+        - connectType
+        - connectTypeDescription
+        - contractType
+        - responsibilityCode
+      properties:
+        connectType:
+          type: string
+          example: EG-MEG
+        connectTypeDescription:
+          type: string
+          example: Widget Adapter
+        contractType:
+          type: string
+          example: Widget Adapter
+        responsibilityCode:
+          type: string
+          example: CD
+       
+    PremiseData:
+      properties:
+        NMI:
+          type: string
+          example: 31200236811
+        streetNumber:
+          type: string
+          example: 52
+        streetName:
+          type: string
+          example: Jane Street
+        streetType:
+          type: string
+          example: street
+        suburb:
+          type: string
+          example: Kedron
+        postCode:
+          type: string
+          example: 4000
+        lotNumber:
+          type: string
+          example: Lot 514
+        planNumber:
+          type: string
+          example: SP741564
+      type: object
+    ApiResponse:
+      type: "object"
+      properties:
+        code:
+          type: "integer"
+          example: 200
+        type:
+          type: "string"
+          example: SUCCESS
+        message:
+          type: "string"
+          example: PROCESSED

@@ -1,0 +1,92 @@
+---
+openapi: 3.0.0
+info:
+  title: Premise Search API
+  description: This is a simple API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/mkeql/PremiseSearch/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: premiseDetails
+  description: retrieve premise details
+paths:
+  /premise:
+    get:
+      tags:
+      - premiseDetails
+      summary: searches premise details
+      description: |
+        By passing in the appropriate options, you can search for
+        available inventory in the system
+      operationId: getPremiseDetails
+      parameters:
+      - name: nmi
+        in: query
+        description: passed as an input to retieve information regarding connection point.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NMIStatus'
+        "400":
+          description: bad input parameter
+components:
+  schemas:
+    NMIStatus:
+      required:
+      - address
+      - connectionType
+      - nmi
+      - nmiStatus
+      - tariff
+      type: object
+      properties:
+        nmi:
+          type: string
+          example: "30523457421"
+        address:
+          $ref: '#/components/schemas/Address'
+        nmiStatus:
+          type: string
+          example: Active
+        connectionType:
+          type: string
+          example: PERMAN
+        tariff:
+          type: string
+          example: 8400 1900
+    Address:
+      required:
+      - lotNo
+      type: object
+      properties:
+        lotNo:
+          type: string
+          example: "30"
+        street:
+          type: string
+          example: Wedd Street
+        suburb:
+          type: string
+          example: Spring Hill
+        postcode:
+          type: string
+          example: "4000"
+        state:
+          type: string
+          example: QLD

@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: you@your-company.com
+  description: This is a simple API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Portal Connect API
+  version: 1.0.0
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/mkeql/Connect/1.0.0
+tags:
+- description: Portal connect submit
+  name: connects
+- description: Operations available to regular developers
+  name: developers
+paths:
+  /cmx/connect:
+    post:
+      description: create a connect in peace
+      operationId: createConnect
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Connect'
+        description: Optional description in *Markdown*
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+          description: successful operation
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: an existing item already exists
+      summary: create a connect
+      tags:
+      - connect
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    Connect:
+      example:
+        connectDetails:
+          responsibilityCode: CD
+          connectTypeDescription: Widget Adapter
+          connectType: EG-MEG
+          contractType: Widget Adapter
+        nmidetails:
+          streetName: Jane Street
+          streetType: street
+          streetNumber: "52"
+          suburb: Kedron
+          postCode: "4000"
+          NMI: "31200236811"
+          lotNumber: Lot 514
+          planNumber: SP741564
+      properties:
+        connectDetails:
+          $ref: '#/components/schemas/ConnectDetails'
+        nmidetails:
+          $ref: '#/components/schemas/PremiseData'
+      required:
+      - connectDetails
+      - nmidetails
+      type: object
+    ConnectDetails:
+      example:
+        responsibilityCode: CD
+        connectTypeDescription: Widget Adapter
+        connectType: EG-MEG
+        contractType: Widget Adapter
+      properties:
+        connectType:
+          example: EG-MEG
+          type: string
+        connectTypeDescription:
+          example: Widget Adapter
+          type: string
+        contractType:
+          example: Widget Adapter
+          type: string
+        responsibilityCode:
+          example: CD
+          type: string
+      required:
+      - connectType
+      - connectTypeDescription
+      - contractType
+      - responsibilityCode
+      type: object
+    PremiseData:
+      example:
+        streetName: Jane Street
+        streetType: street
+        streetNumber: "52"
+        suburb: Kedron
+        postCode: "4000"
+        NMI: "31200236811"
+        lotNumber: Lot 514
+        planNumber: SP741564
+      properties:
+        NMI:
+          example: "31200236811"
+          type: string
+        streetNumber:
+          example: "52"
+          type: string
+        streetName:
+          example: Jane Street
+          type: string
+        streetType:
+          example: street
+          type: string
+        suburb:
+          example: Kedron
+          type: string
+        postCode:
+          example: "4000"
+          type: string
+        lotNumber:
+          example: Lot 514
+          type: string
+        planNumber:
+          example: SP741564
+          type: string
+      type: object
+    ApiResponse:
+      example:
+        code: 200
+        type: SUCCESS
+        message: PROCESSED
+      properties:
+        code:
+          example: 200
+          type: integer
+        type:
+          example: SUCCESS
+          type: string
+        message:
+          example: PROCESSED
+          type: string
+      type: object
+

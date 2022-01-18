@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: you@your-company.com
+  description: This is a simple API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Premise Search API
+  version: 1.0.0
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/mkeql/PremiseSearch/1.0.0
+tags:
+- description: retrieve premise details
+  name: premiseDetails
+paths:
+  /premise:
+    get:
+      description: |
+        By passing in the appropriate options, you can search for
+        available inventory in the system
+      operationId: getPremiseDetails
+      parameters:
+      - description: passed as an input to retieve information regarding connection
+          point.
+        explode: true
+        in: query
+        name: nmi
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NMIStatus'
+                type: array
+          description: search results matching criteria
+        "400":
+          description: bad input parameter
+      summary: searches premise details
+      tags:
+      - premiseDetails
+      x-accepts: application/json
+components:
+  schemas:
+    NMIStatus:
+      example:
+        address:
+          lotNo: "30"
+          street: Wedd Street
+          postcode: "4000"
+          suburb: Spring Hill
+          state: QLD
+        nmiStatus: Active
+        tariff: 8400 1900
+        nmi: "30523457421"
+        connectionType: PERMAN
+      properties:
+        nmi:
+          example: "30523457421"
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        nmiStatus:
+          example: Active
+          type: string
+        connectionType:
+          example: PERMAN
+          type: string
+        tariff:
+          example: 8400 1900
+          type: string
+      required:
+      - address
+      - connectionType
+      - nmi
+      - nmiStatus
+      - tariff
+      type: object
+    Address:
+      example:
+        lotNo: "30"
+        street: Wedd Street
+        postcode: "4000"
+        suburb: Spring Hill
+        state: QLD
+      properties:
+        lotNo:
+          example: "30"
+          type: string
+        street:
+          example: Wedd Street
+          type: string
+        suburb:
+          example: Spring Hill
+          type: string
+        postcode:
+          example: "4000"
+          type: string
+        state:
+          example: QLD
+          type: string
+      required:
+      - lotNo
+      type: object
+
