@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Jan 06 13:48:53 AEST 2022
+aws-java-sdk-simpledb-1.11.256.jar>central=
+aws-java-sdk-simpledb-1.11.256-sources.jar>central=
+aws-java-sdk-simpledb-1.11.256.pom>central=

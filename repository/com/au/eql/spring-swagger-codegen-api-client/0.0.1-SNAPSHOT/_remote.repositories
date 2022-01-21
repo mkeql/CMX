@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Jan 06 13:59:47 AEST 2022
+spring-swagger-codegen-api-client-0.0.1-SNAPSHOT.pom>=
+spring-swagger-codegen-api-client-0.0.1-SNAPSHOT-sources.jar>=
+spring-swagger-codegen-api-client-0.0.1-SNAPSHOT.jar>=
+spring-swagger-codegen-api-client-0.0.1-SNAPSHOT-tests.jar>=

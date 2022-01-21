@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Dec 29 23:37:37 AEST 2021
+jna-4.5.2.jar>central=
+jna-4.5.2-sources.jar>central=
+jna-4.5.2.pom>central=
